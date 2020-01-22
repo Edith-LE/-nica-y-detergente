@@ -1,12 +1,15 @@
-const canvas = document.querySelector('#canvas-one')
-const ctx = canvas.getContext('2d')
-let interval
-let frames=0
-let logos = []
-let score = 0
-let enemies= []
+const canvas2 = document.querySelector('#canvas-two')
+const ctx2 = canvas2.getContext('2d')
 
-const img = {
+//ctx2.fillRect(10,10,50,50)
+
+let interval2
+let frames2=0
+let logos2 = []
+let score2 = 0
+let enemies2= []
+
+const img2 = {
     bg1: './images/bg-vintage.jpg',
     kimberly: './sprite-one/sprite-one-1.png',
     instagram: './images/logo-instagram.png',
@@ -19,7 +22,7 @@ const img = {
 
 }
 
-class Background{
+class Background2{
     constructor (x,y){
     this.x = x
     this.y = y
@@ -42,13 +45,13 @@ class Background{
                     this.y, 
                     this.width, 
                     this.height)
-        ctx.drawImage(this.img, this.x + this.width, this.y, this.width, this.height)
-        ctx.font = '30px Arial'
-        ctx.fillStyle = 'white'
+        ctx2.drawImage(this.img, this.x + this.width, this.y, this.width, this.height)
+        ctx2.font = '30px Arial'
+        ctx2.fillStyle = 'white'
     }    
 }
 
-class Character{
+class Character2{
     constructor (x, y){
         this.x = x
         this.y = y
@@ -66,7 +69,7 @@ class Character{
     draw(){
         if(this.sx >= 670) this.sx = 0
     //ctx.fillRect(this.x,this.y,10,10);
-        ctx.drawImage(
+        ctx2.drawImage(
             this.img,
             this.sx,
             this.sy,
@@ -78,79 +81,63 @@ class Character{
             this.height
         ) 
     }
-    goRight(){
+    goRight2(){
         if(this.x > canvas.width - 100) return
         this.x += 10
         this.move()
     }
-    goLeft(){
+    goLeft2(){
         this.x -=10
         this.move()
     }
-    goUp(){
+    goUp2(){
         this.y -= 10
         this.move()
     }
-    goDown(){
+    goDown2(){
         this.y += 10
         this.move()
     }
-    move (){
+    /*move (){
         this.sx += 55
-    }
-    isTouching(logo) {
+    }*/
+    isTouching(logo2) {
         return (
-          this.x < logo.x + logo.width &&
-          this.x + this.logo > logo.x &&
-          this.y < logo.y + logo.height &&
-          this.y + this.logo > logo.y
+          this.x < logo2.x + logo2width &&
+          this.x + this.logo2 > logo2.x &&
+          this.y < logo2.y + logo2.height &&
+          this.y + this.logo2 > logo2.y
         )
     }
 }
 
-class Logos{
-    constructor (logo, y){
-        switch(logo){
-            case 1:
-                this.x = 300
-                this.y = y
-                this.width = 60
-                this.height = 50
-                this.img = new Image ()
-                this.img.src = img.instagram
-                this.onload = () =>{
-                    this.draw ()
-                }
-            break;
-            case 2:
-                this.x = 300
-                this.y = y
-                this.width = 50
-                this.height = 50
-                this.img = new Image ()
-                this.img.src = img.starbucks
-                this.onload = () =>{
-                    this.draw()
-                }
-            break;
-            case 3: 
-            this.x = 300
-            this.y = y
-            this.width = 70
-            this.height = 50
-            this.img = new Image ()
-            this.img.src = img.tinder
-            this.onload =  () =>{
-                this.draw()
-            }
-            break;
+class Logos2{
+    constructor (x, y, imgSrc){
+        this.x = x
+        this.y = y
+        this.width = 50
+        this.height = 50
+        this.img = new Image()
+        this.img.src = imgSrc
+        this.img.onload = () =>{
+            this.draw()
         }
+    }
+    draw(){
+        this.x --
+        ctx2.drawImage(this.img, this.x, this.y, this.width, this.height)
+    }
+    isTouching (logos2){
+        return (
+            this.x < logos2.x + logos2.width &&
+            this.x + this.width > logos2.x &&
+            this.y < logos2.y + logos2.height &&
+            this.y + this.height > logos2.y
+        );
     }
 }
 
-
-
-class Enemies{
+class Enemies2{
     constructor (enemie, y){
         switch (enemie){
             case 1:
@@ -200,92 +187,51 @@ class Enemies{
         }       
     }
     draw (){
-        this.x -= 8
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+        this.x -= 6
+        ctx2.drawImage (this.img, this.x, this.y, this.width, this.height)
     }
 }
 
-const kim = new Character (0, canvas.height - 100)
-const background = new Background(0, 0)
+const kim2 = new Character2 (0, canvas.height - 100)
+const background2 = new Background2(0, 0)
 
-function generateLogos(){
-    if( frames % 200 === 0){
+function generateLogos2(){
+    if( frames2 % 200 === 0){
         let position = Math.floor(Math.random()* (400))
         let log = Math.floor(Math.random() * (4))+1
-        logos.push(new Logos (log, position))
+        logos2.push(new Logos2 (log, position))
     }
 }
 
 
-function drawLogos (){
-    //generateLogos()
-    logos.forEach(logos => logos.draw())
+function drawLogos2 (){
+    generateLogos2()
+    logos2.forEach(logos => logos.draw())
 }
 
-function generateEnemies(){
-    if( frames % 180 === 0){
+function generateEnemies2 (){
+    if( frames2 % 200 === 0){
         let position = Math.floor(Math.random() * (400)) + 200
         let enemigo = Math.floor(Math.random()*(4))+1
-        enemies.push(new Enemies(enemigo, position))
+        enemies2.push(new Enemies2(enemigo, position))
     }
 }
 
-function drawEnemies(){
-    enemies.forEach(Enemies => Enemies.draw())
+function drawEnemies2(){
+    enemies2.forEach(Enemies => Enemies.draw())
 
 }
 
-function checkCollitions(){
+
+
+function checkCollitions2(){
     logos.forEach ((logo, idx) =>{
         if (kim.isTouching(logo)){
             if(logo.img.src === img.instagram) score += 5
             else score +=20
-            return logos.splice(idx, 1)
+            return logos2.splice(idx, 1)
         }
     })
 
 }
 
-function startGame (){
-    if (interval) return
-    interval = setInterval(update, 1000/60)
-}
-
-function update (){
-    frames ++
-    ctx.clearRect(0,0, canvas.width, canvas.height) 
-    background.draw()
-    kim.draw() 
-    drawLogos()
-    checkCollitions()
-    generateEnemies()
-    drawEnemies()
-    ctx.fillText(String(score), canvas.width - 100, 100)
-
-
-    frames2 ++
-    ctx2.clearRect(0,0, canvas.width, canvas.height)
-    background2.draw()
-    drawLogos2()
-    checkCollitions2()
-    generateEnemies2()
-    drawEnemies2()
-    //ctx2.fillStyle(String (score), canvas.width - 100, 100)
-}
-
-document.addEventListener('keydown', ({keyCode})=>{
-    switch (keyCode){
-        case 39:
-            return kim.goRight()
-        case 38:
-            return kim.goUp()
-        case 37:
-            return kim.goLeft()
-        case 40:
-            return kim.goDown()
-        case 70:
-            return  startGame()
-
-    }
-    //console.log(keyCode)
-})
