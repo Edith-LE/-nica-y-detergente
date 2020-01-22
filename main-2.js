@@ -199,13 +199,14 @@ function generateLogos2(){
     if( frames2 % 200 === 0){
         let position = Math.floor(Math.random()* (400))
         let log = Math.floor(Math.random() * (4))+1
-        logos2.push(new Logos2 (log, position))
+        logos2.push(new Logos2(log, position,'./images/Tinder-logo.png'))
     }
 }
 
 
 function drawLogos2 (){
     generateLogos2()
+    console.log(logos2)
     logos2.forEach(logos => logos.draw())
 }
 
