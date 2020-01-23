@@ -101,12 +101,12 @@ class Character2{
     move (){
         this.sx += 110
     }
-    isTouching(character2) {
+    isTouching(chac2) {
         return (
-          this.x < character2.x + character2.width &&
-          this.x + this.width > Character2.x &&
-          this.y < character2.y + Character2.height &&
-          this.y + this.height > character2.y
+          this.x < chac2.x + chac2.width &&
+          this.x + this.width > chac2.x &&
+          this.y < chac2.y + chac2.height &&
+          this.y + this.height > chac2.y
         )
     }
 }
@@ -179,7 +179,7 @@ class Enemies2{
                 this.img.src = img2.chairEnemi
                 this.onload = () =>{
                   //  this.draw()
-                }
+                }               
             break;
             case 2:
                 this.x = 300
@@ -220,25 +220,25 @@ class Enemies2{
         this.x -= 6
         ctx2.drawImage (this.img, this.x, this.y, this.width, this.height)
     }
-    isTouching (enemie2){
-        return (
-            this.x < enemie2.x + enemie2.width &&
-            this.x + this.width > enemie2.x &&
-            this.y < enemie2.y + enemie2.height &&
-            this.y + this.height > enemie2.y
-        );
-    }
+    // isTouching (enemie2){
+    //     return (
+    //         this.x < enemie2.x + enemie2.width &&
+    //         this.x + this.width > enemie2.x &&
+    //         this.y < enemie2.y + enemie2.height &&
+    //         this.y + this.height > enemie2.y
+    //     );
+    // }
 }
 
 const nat = new Character2 (0, canvas.height - 100)
 const background2 = new Background2(0, 0)
 
 function generateLogos2(){
-    if( frames2 % 200 === 0){
+    if( frames2 % 100 === 0){
         let position = Math.floor(Math.random()* (400))
-        let log = Math.floor(Math.random() * (2))+1
+        let log = Math.floor(Math.random() * (3))+1
         //logos2.push(new Logos2 (log, position))
-        logos2.push(new Logos2(log, position,'./images/Tinder-logo.png'))
+        logos2.push(new Logos2(log, position))
     }
 }
 
@@ -251,7 +251,7 @@ function drawLogos2 (){
 }
 
 function generateEnemies2 (){
-    if( frames2 % 200 === 0){
+    if( frames2 % 180 === 0){
         let position = Math.floor(Math.random() * (400)) + 200
         let enemigo = Math.floor(Math.random()*(4))+1
         enemies2.push(new Enemies2(enemigo, position))
@@ -269,10 +269,10 @@ function checkCollitions2(){
     logos2.forEach ((logo, idx) =>{
         if (nat.isTouching(logo)){
             if(logo.img.src === img.instagram) score += 5
+            if(logo.img.src === img.tinder) score +=5
             else score +=20
-            return logos2.splice(idx, 1)
+             return logos2.splice(idx, 1)
         }
     })
-
 }
 

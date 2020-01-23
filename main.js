@@ -201,6 +201,7 @@ class Enemies{
                 }
             break;
             case 4:
+                this.id = 'jefe'
                 this.x = 300
                 this.y = y
                 this.width = 70
@@ -272,24 +273,12 @@ function checkCollitionsEnemie (){
     enemies.forEach((enem, idx) =>{
         if(kim.isTouching(enem)){
             score -= 5
+            if(enem.id === 'jefe'){
+                gameOver()
+            }
             return enemies.splice(idx, 1)
-            // console.log('me están tocando')
-            // console.log(enem.img)
-            //  if(enem.img.src === img.chairEnemi){
-            //      score -= 5
-                 
-            }//else if (enem.img.src === img.plumones){
-            //     score -= 5
-            // }else if (enem.img.src === img.engrapadora){
-            //     score -= 5
-            // }else{
-            //     //gameOver()
-            // }
-            // if(enem.img.src === img.chairEnemi) score -= 5
-            // if(enem.img.src === img.plumones) score -= 5
-            // if(enem.img.src === img.engrapadora) score -= 5
-            // else gameOver()
-            // return enemies.splice(idx, 1)
+           
+            }
                 
     })
 }
@@ -327,7 +316,7 @@ function update (){
     generateEnemies2()
     drawEnemies2()
     nat.draw()
-    //ctx2.fillStyle(String (score), canvas.width - 100, 100)
+    ctx2.fillText(String (score2), canvas.width - 100, 100)
 }
 
 document.addEventListener('keydown', ({keyCode})=>{
