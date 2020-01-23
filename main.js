@@ -231,7 +231,7 @@ const kim = new Character (0, canvas.height - 100)
 const background = new Background(0, 0)
 
 function generateLogos(){
-    if( frames % 200 === 0){
+    if( frames % 100 === 0){
         let position = Math.floor(Math.random()* (400))
         let log = Math.floor(Math.random() * (3))+1
         logos.push(new Logos (log, position))
@@ -266,7 +266,32 @@ function checkCollitions(){
             return logos.splice(idx, 1)
         }
     })
+}
 
+function checkCollitionsEnemie (){
+    enemies.forEach((enem, idx) =>{
+        if(kim.isTouching(enem)){
+            score -= 5
+            return enemies.splice(idx, 1)
+            // console.log('me están tocando')
+            // console.log(enem.img)
+            //  if(enem.img.src === img.chairEnemi){
+            //      score -= 5
+                 
+            }//else if (enem.img.src === img.plumones){
+            //     score -= 5
+            // }else if (enem.img.src === img.engrapadora){
+            //     score -= 5
+            // }else{
+            //     //gameOver()
+            // }
+            // if(enem.img.src === img.chairEnemi) score -= 5
+            // if(enem.img.src === img.plumones) score -= 5
+            // if(enem.img.src === img.engrapadora) score -= 5
+            // else gameOver()
+            // return enemies.splice(idx, 1)
+                
+    })
 }
 
 function startGame (){
@@ -274,18 +299,25 @@ function startGame (){
     interval = setInterval(update, 1000/60)
 }
 
+function gameOver (){
+    ctx.font = '50px Courier';
+    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
+
+    clearInterval(interval);
+}
+
 function update (){
     frames ++
     ctx.clearRect(0,0, canvas.width, canvas.height) 
     background.draw()
+    kim.draw()
     drawLogos()
     checkCollitions()
     generateEnemies()
     drawEnemies()
-    kim.draw() 
-    console.log(score)
+    checkCollitionsEnemie() 
+    //console.log(score)
     ctx.fillText(String(score), canvas.width - 100, 100)
-
 
     frames2 ++
     ctx2.clearRect(0,0, canvas.width, canvas.height)
