@@ -39,7 +39,7 @@ class Background2{
        // if(this.x >= 8487) this.x = 0
         if(this.x < -canvas.width) this.x = 0
         this.x --
-        ctx.drawImage(
+        ctx2.drawImage(
                     this.img,
                     this.x,
                     this.y, 
@@ -101,33 +101,61 @@ class Character2{
     /*move (){
         this.sx += 55
     }*/
-    isTouching(logo2) {
+    isTouching(character2) {
         return (
-          this.x < logo2.x + logo2width &&
-          this.x + this.logo2 > logo2.x &&
-          this.y < logo2.y + logo2.height &&
-          this.y + this.logo2 > logo2.y
+          this.x < character2.x + character2.width &&
+          this.x + this.character2 > Character2.x &&
+          this.y < character2.y + Character2.height &&
+          this.y + this.character2 > character2.y
         )
     }
 }
 
 class Logos2{
-    constructor (x, y, imgSrc){
-        this.x = x
-        this.y = y
-        this.width = 50
-        this.height = 50
-        this.img = new Image()
-        this.img.src = imgSrc
-        this.img.onload = () =>{
-            this.draw()
+    constructor (logo, y){
+        switch(logo){
+            case 1:
+                this.x = 300
+                this.y = y
+                this.width = 60
+                this.height = 50
+                this.img = new Image ()
+                this.img.src = img2.instagram
+                this.onload = () =>{
+                  //  this.draw ()
+                }
+            break;
+            case 2:
+                this.x = 300
+                this.y = y
+                this.width = 50
+                this.height = 50
+                this.img = new Image ()
+                this.img.src = img2.starbucks
+                this.onload = () =>{
+                //    this.draw()
+                }
+            break;
+            case 3: 
+            this.x = 300
+            this.y = y
+            this.width = 70
+            this.height = 50
+            this.img = new Image ()
+            this.img.src = img2.tinder
+            this.onload =  () =>{
+              //  this.draw()
+            }
+            break;
         }
-    }
-    draw(){
+     }
+
+     draw(){
         this.x --
         ctx2.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
-    isTouching (logos2){
+
+     isTouching (logos2){
         return (
             this.x < logos2.x + logos2.width &&
             this.x + this.width > logos2.x &&
@@ -136,6 +164,8 @@ class Logos2{
         );
     }
 }
+
+
 
 class Enemies2{
     constructor (enemie, y){
@@ -146,9 +176,9 @@ class Enemies2{
                 this.width = 50
                 this.height = 50
                 this.img = new Image ()
-                this.img.src = img.chairEnemi
+                this.img.src = img2.chairEnemi
                 this.onload = () =>{
-                    this.draw()
+                  //  this.draw()
                 }
             break;
             case 2:
@@ -157,9 +187,9 @@ class Enemies2{
                 this.width = 50
                 this.height = 50
                 this.img = new Image ()
-                this.img.src = img.plumones
+                this.img.src = img2.plumones
                 this.onload = () =>{
-                    this.draw()
+                   // this.draw()
                 }
             break;
             case 3:
@@ -168,9 +198,9 @@ class Enemies2{
                 this.width = 50
                 this.height = 50
                 this.img = new Image ()
-                this.img.src = img.engrapadora
+                this.img.src = img2.engrapadora
                 this.onload = () =>{
-                    this.draw()
+                 //   this.draw()
                 }
             break;
             case 4:
@@ -179,9 +209,9 @@ class Enemies2{
                 this.width = 70
                 this.height = 50
                 this.img = new Image ()
-                this.img.src = img.jefeGodin
+                this.img.src = img2.jefeGodin
                 this.onload = () =>{
-                    this.draw()
+                  //  this.draw()
                 }
             break;
         }       
@@ -189,6 +219,14 @@ class Enemies2{
     draw (){
         this.x -= 6
         ctx2.drawImage (this.img, this.x, this.y, this.width, this.height)
+    }
+    isTouching (enemie2){
+        return (
+            this.x < enemie2.x + enemie2.width &&
+            this.x + this.width > enemie2.x &&
+            this.y < enemie2.y + enemie2.height &&
+            this.y + this.height > enemie2.y
+        );
     }
 }
 
@@ -198,14 +236,17 @@ const background2 = new Background2(0, 0)
 function generateLogos2(){
     if( frames2 % 200 === 0){
         let position = Math.floor(Math.random()* (400))
-        let log = Math.floor(Math.random() * (4))+1
-        logos2.push(new Logos2 (log, position))
+        let log = Math.floor(Math.random() * (2))+1
+        //logos2.push(new Logos2 (log, position))
+        logos2.push(new Logos2(log, position,'./images/Tinder-logo.png'))
     }
 }
 
 
+
 function drawLogos2 (){
     generateLogos2()
+    //console.log(logos2)
     logos2.forEach(logos => logos.draw())
 }
 
@@ -225,8 +266,8 @@ function drawEnemies2(){
 
 
 function checkCollitions2(){
-    logos.forEach ((logo, idx) =>{
-        if (kim.isTouching(logo)){
+    logos2.forEach ((logo, idx) =>{
+        if (kim2.isTouching(logo)){
             if(logo.img.src === img.instagram) score += 5
             else score +=20
             return logos2.splice(idx, 1)

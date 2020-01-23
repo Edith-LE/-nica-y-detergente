@@ -33,7 +33,7 @@ class Background{
         }
     }
     draw(){
-       // if(this.x >= 8487) this.x = 0
+        //if(this.x >= 8487) this.x = 0
         if(this.x < -canvas.width) this.x = 0
         this.x --
         ctx.drawImage(
@@ -66,7 +66,7 @@ class Character{
     draw(){
         if(this.sx >= 670) this.sx = 0
     //ctx.fillRect(this.x,this.y,10,10);
-        ctx.drawImage(
+        ctx2.drawImage(
             this.img,
             this.sx,
             this.sy,
@@ -119,7 +119,7 @@ class Logos{
                 this.img = new Image ()
                 this.img.src = img.instagram
                 this.onload = () =>{
-                    this.draw ()
+                  //  this.draw ()
                 }
             break;
             case 2:
@@ -130,7 +130,7 @@ class Logos{
                 this.img = new Image ()
                 this.img.src = img.starbucks
                 this.onload = () =>{
-                    this.draw()
+                //    this.draw()
                 }
             break;
             case 3: 
@@ -141,11 +141,26 @@ class Logos{
             this.img = new Image ()
             this.img.src = img.tinder
             this.onload =  () =>{
-                this.draw()
+              //  this.draw()
             }
             break;
         }
     }
+
+    draw(){
+        this.x --
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+    }
+
+    isTouching(logos){
+        return (
+            this.x < logos.x + logos.width &&
+            this.x + this.width > logos.x &&
+            this.y < logos.y + logos.height &&
+            this.y + this.height > logos.y
+        );
+    }
+    
 }
 
 
@@ -161,7 +176,7 @@ class Enemies{
                 this.img = new Image ()
                 this.img.src = img.chairEnemi
                 this.onload = () =>{
-                    this.draw()
+//                    this.draw()
                 }
             break;
             case 2:
@@ -172,7 +187,7 @@ class Enemies{
                 this.img = new Image ()
                 this.img.src = img.plumones
                 this.onload = () =>{
-                    this.draw()
+  //                  this.draw()
                 }
             break;
             case 3:
@@ -183,7 +198,7 @@ class Enemies{
                 this.img = new Image ()
                 this.img.src = img.engrapadora
                 this.onload = () =>{
-                    this.draw()
+    //                this.draw()
                 }
             break;
             case 4:
@@ -194,7 +209,7 @@ class Enemies{
                 this.img = new Image ()
                 this.img.src = img.jefeGodin
                 this.onload = () =>{
-                    this.draw()
+      //              this.draw()
                 }
             break;
         }       
@@ -202,6 +217,14 @@ class Enemies{
     draw (){
         this.x -= 8
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+    }
+    isTouching (enemie){
+        return (
+            this.x < enemie.x + enemie.width &&
+            this.x + this.width > enemie.x &&
+            this.y < enemie.y + enemie.height &&
+            this.y + this.height > enemie.y
+        );
     }
 }
 
@@ -211,15 +234,15 @@ const background = new Background(0, 0)
 function generateLogos(){
     if( frames % 200 === 0){
         let position = Math.floor(Math.random()* (400))
-        let log = Math.floor(Math.random() * (4))+1
+        let log = Math.floor(Math.random() * (2))+1
         logos.push(new Logos (log, position))
     }
 }
 
 
 function drawLogos (){
-    //generateLogos()
-    logos.forEach(logos => logos.draw())
+    generateLogos()
+    logos.forEach(lopgos => lopgos.draw())
 }
 
 function generateEnemies(){
@@ -255,7 +278,7 @@ function update (){
     frames ++
     ctx.clearRect(0,0, canvas.width, canvas.height) 
     background.draw()
-    kim.draw() 
+    //kim.draw() 
     drawLogos()
     checkCollitions()
     generateEnemies()
