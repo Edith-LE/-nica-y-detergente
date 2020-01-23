@@ -104,9 +104,9 @@ class Character2{
     isTouching(character2) {
         return (
           this.x < character2.x + character2.width &&
-          this.x + this.character2 > Character2.x &&
+          this.x + this.width > Character2.x &&
           this.y < character2.y + Character2.height &&
-          this.y + this.character2 > character2.y
+          this.y + this.height > character2.y
         )
     }
 }
@@ -155,14 +155,14 @@ class Logos2{
         ctx2.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 
-     isTouching (logos2){
-        return (
-            this.x < logos2.x + logos2.width &&
-            this.x + this.width > logos2.x &&
-            this.y < logos2.y + logos2.height &&
-            this.y + this.height > logos2.y
-        );
-    }
+    //  isTouching (logos2){
+    //     return (
+    //         this.x < logos2.x + logos2.width &&
+    //         this.x + this.width > logos2.x &&
+    //         this.y < logos2.y + logos2.height &&
+    //         this.y + this.height > logos2.y
+    //     );
+    // }
 }
 
 

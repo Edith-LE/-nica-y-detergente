@@ -233,7 +233,7 @@ const background = new Background(0, 0)
 function generateLogos(){
     if( frames % 200 === 0){
         let position = Math.floor(Math.random()* (400))
-        let log = Math.floor(Math.random() * (2))+1
+        let log = Math.floor(Math.random() * (3))+1
         logos.push(new Logos (log, position))
     }
 }
@@ -261,6 +261,7 @@ function checkCollitions(){
     logos.forEach ((logo, idx) =>{
         if (kim.isTouching(logo)){
             if(logo.img.src === img.instagram) score += 5
+            if(logo.img.src === img.tinder) score +=5
             else score +=20
             return logos.splice(idx, 1)
         }
