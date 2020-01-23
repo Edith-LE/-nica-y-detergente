@@ -15,7 +15,8 @@ const img = {
     chairEnemi: './images/imágenes que restan puntos/silla de oficina.png',
     plumones: './images/imágenes que restan puntos/cosas de oficina.png',
     jefeGodin: './images/imágenes que restan puntos/jefe godín.png',
-    engrapadora: './images/imágenes que restan puntos/engrapadora.jpg'
+    engrapadora: './images/imágenes que restan puntos/engrapadora.jpg',
+    gameOver: './images/GameOver.jpg',
 
 }
 
@@ -45,15 +46,17 @@ class Background{
         ctx.drawImage(this.img, this.x + this.width, this.y, this.width, this.height)
         ctx.font = '30px Arial'
         ctx.fillStyle = 'white'
-    }    
+    }  
+
 }
 
 class Character{
     constructor (x, y){
+        this.hp = 50
         this.x = x
         this.y = y
-        this.width = 100
-        this.height = 100
+        this.width = 95
+        this.height = 115
         this.sx = 0
         this.sy = 0
         this.img = new Image()
@@ -63,14 +66,14 @@ class Character{
        }
     }
     draw(){
-        if(this.sx >= 2010) this.sx = 0
+        if(this.sx >= 1915) this.sx = 0
     //ctx.fillRect(this.x,this.y,10,10);
         ctx.drawImage(
             this.img,
             this.sx,
             this.sy,
-            115,
-            95,
+            this.width,
+            this.height,
             this.x,
             this.y,
             this.width,
@@ -104,6 +107,10 @@ class Character{
           this.y < log.y + log.height &&
           this.y + this.height > log.y
         )
+    }
+    drawLife(){
+        ctx.fillRect(20, 20, (this.hp * 200) / 50, 20)
+        //ctx.drawImage ()
     }
 }
 
@@ -272,7 +279,10 @@ function checkCollitions(){
 function checkCollitionsEnemie (){
     enemies.forEach((enem, idx) =>{
         if(kim.isTouching(enem)){
-            score -= 5
+            kim.hp-= 5
+            if(kim.hp === 0){
+                gameOver()
+            }
             if(enem.id === 'jefe'){
                 gameOver()
             }
@@ -287,35 +297,45 @@ function startGame (){
     if (interval) return
     interval = setInterval(update, 1000/60)
 }
+// window.onload=() =>{
+//     let gameOImage =new Image()
+//     gameOImage.src = img.gameOver
+//     ctx.drawImage(gameOImage, 0,0, 300, 500)
+
+// }
 
 function gameOver (){
+    
     ctx.font = '50px Courier';
-    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
+    ctx.fillText('GAME OVER', canvas.width , canvas.height );
 
     clearInterval(interval);
 }
+
 
 function update (){
     frames ++
     ctx.clearRect(0,0, canvas.width, canvas.height) 
     background.draw()
     kim.draw()
+    kim.drawLife()
     drawLogos()
     checkCollitions()
     generateEnemies()
     drawEnemies()
     checkCollitionsEnemie() 
-    //console.log(score)
     ctx.fillText(String(score), canvas.width - 100, 100)
 
     frames2 ++
     ctx2.clearRect(0,0, canvas.width, canvas.height)
     background2.draw()
+    nat.draw()
+    nat.drawLife()
     drawLogos2()
     checkCollitions2()
     generateEnemies2()
     drawEnemies2()
-    nat.draw()
+    checkCollitionsEnemie2()
     ctx2.fillText(String (score2), canvas.width - 100, 100)
 }
 

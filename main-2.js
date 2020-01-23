@@ -1,8 +1,5 @@
 const canvas2 = document.querySelector('#canvas-two')
 const ctx2 = canvas2.getContext('2d')
-
-//ctx2.fillRect(10,10,50,50)
-
 let interval2
 let frames2=0
 let logos2 = []
@@ -18,7 +15,8 @@ const img2 = {
     chairEnemi: './images/imágenes que restan puntos/silla de oficina.png',
     plumones: './images/imágenes que restan puntos/cosas de oficina.png',
     jefeGodin: './images/imágenes que restan puntos/jefe godín.png',
-    engrapadora: './images/imágenes que restan puntos/engrapadora.jpg'
+    engrapadora: './images/imágenes que restan puntos/engrapadora.jpg',
+    gameOver: './images/GameOver.jpg'
 
 }
 
@@ -53,6 +51,7 @@ class Background2{
 
 class Character2{
     constructor (x, y){
+        this.hp= 50
         this.x = x
         this.y = y
         this.width = 100
@@ -108,6 +107,9 @@ class Character2{
           this.y < chac2.y + chac2.height &&
           this.y + this.height > chac2.y
         )
+    }
+    drawLife(){
+        ctx2.fillRect(20, 20, (this.hp * 200) / 50, 20)
     }
 }
 
@@ -204,6 +206,7 @@ class Enemies2{
                 }
             break;
             case 4:
+                this.id = 'jefe'
                 this.x = 300
                 this.y = y
                 this.width = 70
@@ -268,11 +271,32 @@ function drawEnemies2(){
 function checkCollitions2(){
     logos2.forEach ((logo, idx) =>{
         if (nat.isTouching(logo)){
-            if(logo.img.src === img.instagram) score += 5
-            if(logo.img.src === img.tinder) score +=5
-            else score +=20
+            if(logo.img.src === img.instagram) score2 += 5
+            if(logo.img.src === img.tinder) score2 +=5
+            else score2 +=20
              return logos2.splice(idx, 1)
         }
     })
+}
+
+function checkCollitionsEnemie2 (){
+    enemies2.forEach((enem, idx)=>{
+        if(nat.isTouching(enem)){
+            nat.hp -=5
+            if(enem.id === 'jefe'){
+                gameOver2 ()
+            }
+            return enemies2.splice(idx,1)
+        }
+    })
+}
+
+function gameOver2 (){
+    ctx.font = '50px Courier';
+    ctx.fillText('GAME OVER', canvas.width , canvas.height );
+
+  
+
+    clearInterval(interval);
 }
 
