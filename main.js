@@ -8,7 +8,7 @@ let enemies= []
 
 const img = {
     bg1: './images/bg-vintage.jpg',
-    kimberly: './sprite-one/sprite-one-1.png',
+    kimberly: './sprite-one/merge_from_ofoct.png',
     instagram: './images/logo-instagram.png',
     starbucks: './images/Starbucks-logo.png',
     tinder: './images/Tinder-logo.png',
@@ -59,44 +59,43 @@ class Character{
         this.img = new Image()
         this.img.src = img.kimberly
         this.img.onload = () => {
-            this.x = x
             this.draw()
        }
     }
     draw(){
-        if(this.sx >= 670) this.sx = 0
+        if(this.sx >= 2010) this.sx = 0
     //ctx.fillRect(this.x,this.y,10,10);
-        ctx2.drawImage(
+        ctx.drawImage(
             this.img,
             this.sx,
             this.sy,
-            96,
             115,
+            95,
             this.x,
             this.y,
             this.width,
             this.height
         ) 
     }
-    goRight(){
-        if(this.x > canvas.width - 100) return
-        this.x += 10
-        this.move()
-    }
-    goLeft(){
-        this.x -=10
-        this.move()
-    }
+    // goRight(){
+    //     if(this.x > canvas.width - 100) return
+    //     this.x += 10
+    //     this.move()
+    // }
+    // goLeft(){
+    //     this.x -=10
+    //     this.move()
+    // }
     goUp(){
-        this.y -= 10
+        this.y -= 20
         this.move()
     }
     goDown(){
-        this.y += 10
+        this.y += 20
         this.move()
     }
     move (){
-        this.sx += 55
+        this.sx += 95
     }
     isTouching(logo) {
         return (
@@ -114,8 +113,8 @@ class Logos{
             case 1:
                 this.x = 300
                 this.y = y
-                this.width = 60
-                this.height = 50
+                this.width = 70
+                this.height = 60
                 this.img = new Image ()
                 this.img.src = img.instagram
                 this.onload = () =>{
@@ -278,11 +277,11 @@ function update (){
     frames ++
     ctx.clearRect(0,0, canvas.width, canvas.height) 
     background.draw()
-    //kim.draw() 
     drawLogos()
     checkCollitions()
     generateEnemies()
     drawEnemies()
+    kim.draw() 
     ctx.fillText(String(score), canvas.width - 100, 100)
 
 
@@ -293,17 +292,18 @@ function update (){
     checkCollitions2()
     generateEnemies2()
     drawEnemies2()
+    nat.draw()
     //ctx2.fillStyle(String (score), canvas.width - 100, 100)
 }
 
 document.addEventListener('keydown', ({keyCode})=>{
     switch (keyCode){
-        case 39:
-            return kim.goRight()
+        case 87:
+            return nat.goUp2()
+        case 83: 
+            return nat.goDown2()
         case 38:
             return kim.goUp()
-        case 37:
-            return kim.goLeft()
         case 40:
             return kim.goDown()
         case 70:
