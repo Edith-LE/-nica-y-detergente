@@ -97,12 +97,12 @@ class Character{
     move (){
         this.sx += 95
     }
-    isTouching(logo) {
+    isTouching(log) {
         return (
-          this.x < logo.x + logo.width &&
-          this.x + this.logo > logo.x &&
-          this.y < logo.y + logo.height &&
-          this.y + this.logo > logo.y
+          this.x < log.x + log.width &&
+          this.x + this.width > log.x &&
+          this.y < log.y + log.height &&
+          this.y + this.height > log.y
         )
     }
 }
@@ -151,14 +151,14 @@ class Logos{
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 
-    isTouching(logos){
-        return (
-            this.x < logos.x + logos.width &&
-            this.x + this.width > logos.x &&
-            this.y < logos.y + logos.height &&
-            this.y + this.height > logos.y
-        );
-    }
+    // isTouching(logo){
+    //     return (
+    //         this.x < logo.x + logo.width &&
+    //         this.x + this.width > logo.x &&
+    //         this.y < logo.y + logo.height &&
+    //         this.y + this.height > logo.y
+    //     );
+    // }
     
 }
 
@@ -170,8 +170,8 @@ class Enemies{
             case 1:
                 this.x = 300
                 this.y = y
-                this.width = 50
-                this.height = 50
+                this.width = 60
+                this.height = 60
                 this.img = new Image ()
                 this.img.src = img.chairEnemi
                 this.onload = () =>{
@@ -181,8 +181,8 @@ class Enemies{
             case 2:
                 this.x = 300
                 this.y = y
-                this.width = 50
-                this.height = 50
+                this.width = 70
+                this.height = 70
                 this.img = new Image ()
                 this.img.src = img.plumones
                 this.onload = () =>{
@@ -217,14 +217,14 @@ class Enemies{
         this.x -= 8
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
-    isTouching (enemie){
-        return (
-            this.x < enemie.x + enemie.width &&
-            this.x + this.width > enemie.x &&
-            this.y < enemie.y + enemie.height &&
-            this.y + this.height > enemie.y
-        );
-    }
+    // isTouching (enemie){
+    //     return (
+    //         this.x < enemie.x + enemie.width &&
+    //         this.x + this.width > enemie.x &&
+    //         this.y < enemie.y + enemie.height &&
+    //         this.y + this.height > enemie.y
+    //     );
+    // }
 }
 
 const kim = new Character (0, canvas.height - 100)
@@ -282,6 +282,7 @@ function update (){
     generateEnemies()
     drawEnemies()
     kim.draw() 
+    console.log(score)
     ctx.fillText(String(score), canvas.width - 100, 100)
 
 

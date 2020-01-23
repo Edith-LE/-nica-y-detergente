@@ -173,8 +173,8 @@ class Enemies2{
             case 1:
                 this.x = 300
                 this.y = y
-                this.width = 50
-                this.height = 50
+                this.width = 60
+                this.height = 60
                 this.img = new Image ()
                 this.img.src = img2.chairEnemi
                 this.onload = () =>{
@@ -184,8 +184,8 @@ class Enemies2{
             case 2:
                 this.x = 300
                 this.y = y
-                this.width = 50
-                this.height = 50
+                this.width = 70
+                this.height = 70
                 this.img = new Image ()
                 this.img.src = img2.plumones
                 this.onload = () =>{
