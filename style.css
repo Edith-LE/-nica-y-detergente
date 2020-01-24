@@ -1,6 +1,6 @@
 body{
-    background-color: #AF9ED4;
-     
+    background-image: url(./images/pintura.jpg);
+    background-repeat: repeat;     
 }
 
 canvas{
@@ -10,4 +10,19 @@ canvas{
 #container{
     display: flex;
     justify-content: center;
+}
+
+#logos > img{
+    width: 50px;
+    height: auto;
+}
+
+#img-logos{
+    display: flex;
+    
+}
+
+#enemigo > img{
+    width: 60px;
+    height: auto;
 }

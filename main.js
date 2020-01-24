@@ -92,11 +92,11 @@ class Character{
     //     this.move()
     // }
     goUp(){
-        this.y -= 20
+        this.y -= 30
         this.move()
     }
     goDown(){
-        this.y += 20
+        this.y += 30
         this.move()
     }
     move (){
