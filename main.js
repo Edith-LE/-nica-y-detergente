@@ -92,15 +92,24 @@ class Character{
     //     this.move()
     // }
     goUp(){
+        if(this.y < 50){
+            return 
+        }else{
         this.y -= 40
         this.move()
+        }
     }
     goDown(){
+        if(this.y > 430){
+            return
+        }else{
         this.y += 40
         this.move()
+        }
     }
     move (){
         this.sx += 95
+        
     }
     isTouching(log) {
         return (
@@ -267,7 +276,7 @@ function drawLogos (){
 }
 
 function generateEnemies(){
-    if( frames % 100 === 0){
+    if( frames % 80 === 0){
         let position = Math.floor(Math.random() * (400)) + 200
         let enemigo = Math.floor(Math.random()*(4))+1
         enemies.push(new Enemies(enemigo, position))
@@ -360,15 +369,15 @@ function update (){
 
 document.addEventListener('keydown', ({keyCode})=>{
     switch (keyCode){
-        case 87:
-            return nat.goUp2()
-        case 83: 
-            return nat.goDown2()
         case 38:
+            return nat.goUp2()
+        case 40: 
+            return nat.goDown2()
+        case 87:
             return kim.goUp()
-        case 40:
+        case 83:
             return kim.goDown()
-        case 70:
+        case 13:
             return  startGame()
 
     }

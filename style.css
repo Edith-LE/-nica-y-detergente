@@ -5,7 +5,7 @@
 }
 
 #instructions{
-    background-image: url(./images/triangulos.jpg);
+    background-image: url(./images/floresazules.jpg);
 }
 
 canvas{
@@ -30,6 +30,11 @@ canvas{
 } */
 
 header h1{
+    background-color: ivory;
+    margin: auto;
+}
+
+#lose h2{
     background-color: ivory;
     margin: auto;
 }

@@ -81,12 +81,20 @@ class Character2{
         ) 
     }
     goUp2(){
+        if(this.y < 50){
+            return
+        }else{
         this.y -= 40
         this.move()
+        }
     }
     goDown2(){
+        if(this.y > 480){
+            return
+        }else{
         this.y += 40
         this.move()
+        }
     }
     move (){
         this.sx += 110
@@ -265,7 +273,7 @@ function drawLogos2 (){
 }
 
 function generateEnemies2 (){
-    if( frames2 % 180 === 0){
+    if( frames2 % 80 === 0){
         let position = Math.floor(Math.random() * (400)) + 200
         let enemigo = Math.floor(Math.random()*(4))+1
         enemies2.push(new Enemies2(enemigo, position))
