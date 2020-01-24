@@ -1,3 +1,4 @@
+const audio= new Audio('./song.mp3')
 const canvas = document.querySelector('#canvas-one')
 const ctx = canvas.getContext('2d')
 let interval
@@ -16,7 +17,8 @@ const img = {
     plumones: './images/imágenes que restan puntos/cosas de oficina.png',
     jefeGodin: './images/imágenes que restan puntos/jefe godín.png',
     engrapadora: './images/imágenes que restan puntos/engrapadora.jpg',
-    gameOver: './images/GameOver.jpg',
+    gameOverLeft: './images/gameoverLeft.png',
+    gameOverRight: './images/gameoverRight.png'
 
 }
 
@@ -225,18 +227,30 @@ class Enemies{
         this.x -= 8
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
-    // isTouching (enemie){
-    //     return (
-    //         this.x < enemie.x + enemie.width &&
-    //         this.x + this.width > enemie.x &&
-    //         this.y < enemie.y + enemie.height &&
-    //         this.y + this.height > enemie.y
-    //     );
-    // }
+}
+
+class GameOver{
+    constructor (src){
+        this.x = 100
+        this.y = 50
+        this.width = 300 
+        this.height = 500
+        this.img = new Image ()
+        this.img.src = src
+        this.onload = () => {
+            this.draw()
+        }
+    }
+    draw(){
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+
+    }
 }
 
 const kim = new Character (0, canvas.height - 100)
 const background = new Background(0, 0)
+const overLeft = new GameOver (img.gameOverLeft)
+
 
 function generateLogos(){
     if( frames % 100 === 0){
@@ -294,6 +308,10 @@ function checkCollitionsEnemie (){
 }
 
 function startGame (){
+    audio.loop=true;
+    audio.currentTime=0;
+    audio.play();
+
     if (interval) return
     interval = setInterval(update, 1000/60)
 }
@@ -305,10 +323,11 @@ function startGame (){
 // }
 
 function gameOver (){
-    
-    ctx.font = '50px Courier';
-    ctx.fillText('GAME OVER', canvas.width , canvas.height );
-
+    audio.pause();
+    // ctx.font = '50px Courier';
+    // ctx.fillText('GAME OVER', canvas.width/2 , canvas.height/2 );
+    overLeft.draw()
+    overRight.draw()
     clearInterval(interval);
 }
 

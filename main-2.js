@@ -233,8 +233,28 @@ class Enemies2{
     // }
 }
 
+class GameOver2{
+    constructor (src){
+        this.x = 0
+        this.y = 50
+        this.width = 300 
+        this.height = 500
+        this.img = new Image ()
+        this.img.src = src
+        this.onload = () => {
+            this.draw()
+        }
+    }
+    draw(){
+        ctx2.drawImage(this.img, this.x, this.y, this.width, this.height)
+        
+    }
+}
+
 const nat = new Character2 (0, canvas.height - 100)
 const background2 = new Background2(0, 0)
+const overRight = new GameOver2 (img.gameOverRight)
+
 
 function generateLogos2(){
     if( frames2 % 100 === 0){
@@ -284,19 +304,19 @@ function checkCollitionsEnemie2 (){
         if(nat.isTouching(enem)){
             nat.hp -=5
             if(enem.id === 'jefe'){
-                gameOver2 ()
+                gameOver ()
             }
             return enemies2.splice(idx,1)
         }
     })
 }
 
-function gameOver2 (){
-    ctx.font = '50px Courier';
-    ctx.fillText('GAME OVER', canvas.width , canvas.height );
+// function gameOver2 (){
+//     ctx.font = '50px Courier';
+//     ctx.fillText('GAME OVER', canvas.width/2 , canvas.height/2 );
 
   
 
-    clearInterval(interval);
-}
+//     clearInterval(interval);
+// }
 
