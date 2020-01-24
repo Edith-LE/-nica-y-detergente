@@ -80,21 +80,12 @@ class Character2{
             this.height
         ) 
     }
-    // goRight2(){
-    //     if(this.x > canvas.width - 100) return
-    //     this.x += 10
-    //     this.move()
-    // }
-    // goLeft2(){
-    //     this.x -=10
-    //     this.move()
-    // }
     goUp2(){
-        this.y -= 20
+        this.y -= 40
         this.move()
     }
     goDown2(){
-        this.y += 20
+        this.y += 40
         this.move()
     }
     move (){
@@ -174,7 +165,7 @@ class Enemies2{
         switch (enemie){
             case 1:
                 this.x = 300
-                this.y = y
+                this.y = 600
                 this.width = 60
                 this.height = 60
                 this.img = new Image ()
@@ -186,7 +177,7 @@ class Enemies2{
             case 2:
                 this.x = 300
                 this.y = y
-                this.width = 70
+                this.width = 80
                 this.height = 70
                 this.img = new Image ()
                 this.img.src = img2.plumones
@@ -257,7 +248,7 @@ const overRight = new GameOver2 (img.gameOverRight)
 
 
 function generateLogos2(){
-    if( frames2 % 100 === 0){
+    if( frames2 % 280 === 0){
         let position = Math.floor(Math.random()* (400))
         let log = Math.floor(Math.random() * (3))+1
         //logos2.push(new Logos2 (log, position))

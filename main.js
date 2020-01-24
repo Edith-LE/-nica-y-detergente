@@ -92,11 +92,11 @@ class Character{
     //     this.move()
     // }
     goUp(){
-        this.y -= 30
+        this.y -= 40
         this.move()
     }
     goDown(){
-        this.y += 30
+        this.y += 40
         this.move()
     }
     move (){
@@ -122,7 +122,7 @@ class Logos{
             case 1:
                 this.x = 300
                 this.y = y
-                this.width = 70
+                this.width = 80
                 this.height = 60
                 this.img = new Image ()
                 this.img.src = img.instagram
@@ -179,8 +179,8 @@ class Enemies{
             case 1:
                 this.x = 300
                 this.y = y
-                this.width = 60
-                this.height = 60
+                this.width = 80
+                this.height = 80
                 this.img = new Image ()
                 this.img.src = img.chairEnemi
                 this.onload = () =>{
@@ -190,8 +190,8 @@ class Enemies{
             case 2:
                 this.x = 300
                 this.y = y
-                this.width = 70
-                this.height = 70
+                this.width = 80
+                this.height = 80
                 this.img = new Image ()
                 this.img.src = img.plumones
                 this.onload = () =>{
@@ -201,8 +201,8 @@ class Enemies{
             case 3:
                 this.x = 300
                 this.y = y
-                this.width = 50
-                this.height = 50
+                this.width = 70
+                this.height = 70
                 this.img = new Image ()
                 this.img.src = img.engrapadora
                 this.onload = () =>{
@@ -213,8 +213,8 @@ class Enemies{
                 this.id = 'jefe'
                 this.x = 300
                 this.y = y
-                this.width = 70
-                this.height = 50
+                this.width = 90
+                this.height = 80
                 this.img = new Image ()
                 this.img.src = img.jefeGodin
                 this.onload = () =>{
@@ -253,7 +253,7 @@ const overLeft = new GameOver (img.gameOverLeft)
 
 
 function generateLogos(){
-    if( frames % 100 === 0){
+    if( frames % 280 === 0){
         let position = Math.floor(Math.random()* (400))
         let log = Math.floor(Math.random() * (3))+1
         logos.push(new Logos (log, position))
@@ -267,7 +267,7 @@ function drawLogos (){
 }
 
 function generateEnemies(){
-    if( frames % 180 === 0){
+    if( frames % 100 === 0){
         let position = Math.floor(Math.random() * (400)) + 200
         let enemigo = Math.floor(Math.random()*(4))+1
         enemies.push(new Enemies(enemigo, position))

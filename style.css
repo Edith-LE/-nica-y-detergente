@@ -1,6 +1,11 @@
-body{
-    background-image: url(./images/pintura.jpg);
+
+#game{
+    background-image: url(./images/lib-color.jpg);
     background-repeat: repeat;     
+}
+
+#instructions{
+    background-image: url(./images/triangulos.jpg);
 }
 
 canvas{
@@ -10,6 +15,23 @@ canvas{
 #container{
     display: flex;
     justify-content: center;
+}
+
+/* #flechas  img{
+    width: 200px;
+    height: auto;
+    float: right;
+    padding-left: 20px;
+}
+
+#letra > img{
+    width: 500px;
+    height: auto;
+} */
+
+header h1{
+    background-color: ivory;
+    margin: auto;
 }
 
 #logo{
